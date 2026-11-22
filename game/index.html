@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Jade Kettle Heist — Vermilion Teahouse</title>
+<style>
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: #0a0f10;
+    height: 100%;
+    overflow: hidden;
+  }
+  body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  canvas {
+    display: block;
+    width: min(100vw, 160vh);
+    height: min(100vh, 62.5vw);
+    image-rendering: auto;
+    cursor: crosshair;
+  }
+  #selftest {
+    position: absolute;
+    left: 8px;
+    top: 8px;
+    color: #f2e6c8;
+    font: 13px monospace;
+    white-space: pre;
+    z-index: 10;
+  }
+</style>
+</head>
+<body>
+<canvas id="game" width="1280" height="800"></canvas>
+<pre id="selftest"></pre>
+<script type="module">
+  import { startGame } from './src/main.js';
+  window.addEventListener('error', (event) => {
+    const pre = document.getElementById('selftest');
+    if (pre) pre.textContent += `\nERROR ${event.message}`;
+    document.title = 'SELFTEST:FAIL';
+  });
+  startGame();
+</script>
+</body>
+</html>
